@@ -1,18 +1,17 @@
-package com.ftp.fileHandle;
+package fromserver.filehandle;
 
-import com.ftp.TFPutils.FtpUtils;
-import com.ftp.TFPutils.server.MyFtpServer;
-import com.ftp.TFPutils.ServerMessage;
-import com.ftp.TFPutils.UserMessage;
+import fromserver.socketclient.FtpUtils;
+import fromserver.socketclient.MyFtpServer;
+import fromserver.socketclient.ServerMessage;
+import fromserver.socketclient.UserMessage;
 import org.apache.ftpserver.FtpServer;
 import org.apache.ftpserver.ftplet.FtpException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.jupiter.api.Test;
 
 import java.io.*;
 
-/*
+/**
  *@description:
  *
  *@author 10068921(LgyTT)
@@ -56,8 +55,17 @@ public class FileHandle {
             e.printStackTrace();
         }
     }
-    //上传文件（有一个计算机上传至另一个计算机，通过ftp服务器为中转）
-    public void upload(String filePath,String ftpPath,String ItemFilePath){
+
+    /**
+     *@description
+     * 上传文件（有一个计算机上传至另一个计算机，通过ftp服务器为中转)
+     *@param  filePath
+     * @param ftpPath
+     * @param itemFilePath
+     *@return
+     *@anthor  10068921
+     */
+    public void upload(String filePath,String ftpPath,String itemFilePath){
         FtpUtils ftpUtils=new FtpUtils();
       if(!initConnectionFtp()){
           log.error("login is failed");
@@ -71,16 +79,24 @@ public class FileHandle {
               log.error("get WorkingDirectory is failed!");
               e.printStackTrace();
           }
-          ftpUtils.uploadFile(ftpPath,filename,filePath);//上传文件至服务器
+          //上传文件至服务器
+          ftpUtils.uploadFile(ftpPath,filename,filePath);
         try {
-            ftpUtils.downloadFile(FtpUtils.client.printWorkingDirectory(),filename,ItemFilePath);//从服务器上下载
+            //从服务器上下载
+            ftpUtils.downloadFile(FtpUtils.client.printWorkingDirectory(),filename,itemFilePath);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
     }
+/**
+ *@description
+ * 文件地址中截取文件名
+ *@param     filePath
+ *@return
+ *@anthor : 10068921
+ */
 
-    //文件地址中截取文件名
     private String fileName(String filePath) {
         int start=filePath.lastIndexOf("\\")+1;
         int end=filePath.length();
@@ -96,22 +112,8 @@ public class FileHandle {
             e.printStackTrace();
         }
         file.initConnectionFtp();
-//        file.upload("E:\\testFile\\test.properties","E:\\FTPSeverPath","E:\\down");
-
-        try {
-//            if(FtpUtils.logoutFtp());//退出登录
-//            System.out.println("退出登录成功");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
     }
-    @Test
-    public void TestPath(){
-      File[ ]files=File.listRoots();
-      for(File file:files)
-          System.out.println(file.getPath());
-    }
+
 
     }
 

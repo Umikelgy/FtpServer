@@ -1,6 +1,6 @@
-package com.ftp.TFPutils;
+package fromserver.socketclient;
 
-/*
+/**
  *@description:
  *
  *@author 10068921(LgyTT)

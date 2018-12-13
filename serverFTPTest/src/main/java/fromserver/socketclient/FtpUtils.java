@@ -1,4 +1,4 @@
-package com.ftp.TFPutils;
+package fromserver.socketclient;
 
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPConnectionClosedException;
@@ -6,12 +6,14 @@ import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import sun.net.ftp.FtpClient;
+
 
 import java.io.*;
 import java.net.MalformedURLException;
 
-/*
+import static org.apache.commons.net.ftp.FTP.BINARY_FILE_TYPE;
+
+/**
  *@description:
  *
  *@author 10068921(LgyTT)
@@ -38,13 +40,14 @@ public class FtpUtils {
         boolean flag=false;
         client=new FTPClient();
         client.setControlEncoding("utf-8");
-
         try {
             client.connect(message.getHostName(),message.getPort());
+            int replyCode=client.getReplyCode();
+            //是否登陆服务器
             client.login(message.getName(),message.getPasswd());
-            int replyCode=client.getReplyCode();//是否登陆服务器
-            if(!FTPReply.isPositiveCompletion(replyCode))
+            if(!FTPReply.isPositiveCompletion(replyCode)){
                 logger.error("Connect failed---ftp");
+            }
             flag=true;
             System.out.println("connect successful---ftp");
         } catch (MalformedURLException e) {
@@ -65,7 +68,6 @@ public class FtpUtils {
      */
     public static boolean logoutFtp() {
         boolean flag=false;
-
             try{
                 client.logout();
                 client.disconnect();
@@ -77,9 +79,7 @@ public class FtpUtils {
                 logger.error("this is an error occurs while disconnecting");
                 e.printStackTrace();
             }
-
         return flag;
-
     }
     public void initFtpClient(){
         client=new FTPClient();
@@ -88,9 +88,12 @@ public class FtpUtils {
         try {
             client.connect(hostName,port);
             client.login(username,passwd);
-            int replyCode=client.getReplyCode();//是否登陆服务器
-            if(!FTPReply.isPositiveCompletion(replyCode))
+            //是否登陆服务器
+            int replyCode=client.getReplyCode();
+            if(!FTPReply.isPositiveCompletion(replyCode)){
+
                 logger.error("connect failed ---ftp");
+            }
             System.out.println("connect successful ---ftp");
         }catch (MalformedURLException e){
             e.printStackTrace();
@@ -98,11 +101,6 @@ public class FtpUtils {
             e.printStackTrace();
         }
     }
-    public static void main(String []args){
-//        new FtpUtils().uploadFile("E:\\FTPSeverPath","testExcel.xlsx","E:\\testFile\\testExcel.xlsx");
-//        new FtpUtils().getHostDirectory();
-    }
-
     /**
      *@description
      * 上传文件
@@ -120,12 +118,11 @@ public class FtpUtils {
         try {
             inputStream=new FileInputStream(new File(originFileName));
           //  initFtpClient();登陆
-            client.setFileType(client.BINARY_FILE_TYPE);
+            client.setFileType(BINARY_FILE_TYPE);
             client.makeDirectory(pathname);
             client.changeWorkingDirectory(pathname);
             client.storeFile(fileName,inputStream);
             inputStream.close();
-//            client.logout();
             flag=true;
             System.out.println("upload successful!!");
 
@@ -139,39 +136,36 @@ public class FtpUtils {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
             }
-            if(inputStream!=null)
+            if(inputStream!=null) {
                 try {
                     inputStream.close();
-                }catch (IOException e){
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
+            }
         }
         return flag;
     }
 /**
- *@description
+ *@description:
  * 上传文件
  *@param  pathName ftp服务保存地址
  * @param filename 上传文件名称
  * @param inputStream 输入文件流
- *@return
- *@anthor  10068921(lgyTT)
- *@date  2018/11/26
- *@other
+
  */
 public boolean uploadFile(String pathName,String filename,InputStream inputStream){
     boolean flag=false;
     try{
        // initFtpClient();
-        client.setFileType(client.BINARY_FILE_TYPE);
+        client.setFileType(BINARY_FILE_TYPE);
         client.makeDirectory(pathName);
 
         client.changeWorkingDirectory(pathName);
         client.storeFile(filename,inputStream);
         inputStream.close();
-//        client.logout();
+
         flag=true;
         System.out.println("upload successful!!");
 
@@ -208,12 +202,12 @@ public boolean uploadFile(String pathName,String filename,InputStream inputStrea
         boolean flag=false;
         try {
             flag=client.changeWorkingDirectory(directory);
-            if(flag)
+            if(flag){
                 System.out.println("enter The '"+directory+"' is successful!!");
-
-            else
+            }
+            else{
                 logger.error("entering the '"+directory+"' is failed and create new directory!!");
-
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -233,60 +227,71 @@ public boolean uploadFile(String pathName,String filename,InputStream inputStrea
         String directory=remote+"/";
         //如果远程目录不存在，这递归创建远程服务器目录
         if(!directory.equalsIgnoreCase("/")&&!changeWorkingDirectory(new String(directory))){
-            int start=0;
-            int end=0;
-            if(directory.startsWith("/")){
+            int start;
+            int end;
+            String startWith="/";
+            if(directory.startsWith(startWith)){
                 start=1;
             }else {
                 start=0;
             }
             end=directory.indexOf("/",start);
-            String path="";
+            StringBuffer path=new StringBuffer();
             String paths="";
             while(true){
                 String subDirectory=new String (remote.substring(start,end).getBytes("GBK"),"iso-8859-1");
-                path=path+"/"+subDirectory;
-                if(!existFile(path))
-                    if(makeDirectory(subDirectory)){
+                path.append(startWith+subDirectory);
+                if(!existFile(path.toString())) {
+                    if (makeDirectory(subDirectory)) {
                         changeWorkingDirectory(subDirectory);
-                        flag=true;
+                        flag = true;
+                    } else {
+                        logger.error("create directory '" + subDirectory + "' is failed!!");
                     }
-
-                    else {
-                        logger.error("create directory '"+subDirectory+"' is failed!!");
-                    }
-                    else
-                        changeWorkingDirectory(subDirectory);
-                    paths=paths+"/"+subDirectory;
+                } else{
+                    changeWorkingDirectory(subDirectory);
+                }
+                    paths=paths+startWith+subDirectory;
                     start=end+1;
                     end=directory.indexOf("/",start);
-                    if(end<=start)
+                    if(end<=start){
+
                         break;
+                    }
             }
         }
         return flag;
     }
-//创建目录
+/**
+*创建目录
+ * */
     private boolean makeDirectory(String subDirectory) {
         boolean flag=false;
         try{
             flag=client.makeDirectory(subDirectory);
-            if(flag)
+            if(flag){
+
                 System.out.println("create directory is successful!!");
-            else
+            }
+            else{
+
                 logger.error("create directory is failed!!");
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
         return flag;
     }
-
-    //判断文件是否存在
+/**
+* 判断文件是否存在
+* */
     private boolean existFile(String path) throws IOException {
         boolean flag=false;
         FTPFile[] ftpFileArr=client.listFiles();
-        if(ftpFileArr.length>0)
+        if(ftpFileArr.length>0){
+
             flag=true;
+        }
         return flag;
     }
     /** * 下载文件 *
@@ -311,7 +316,6 @@ public boolean uploadFile(String pathName,String filename,InputStream inputStrea
                     os.close();
                 }
             }
-//            client.logout();
             flag = true;
             System.out.println("下载文件成功");
         } catch (Exception e) {
@@ -348,7 +352,6 @@ public boolean uploadFile(String pathName,String filename,InputStream inputStrea
             //切换FTP目录
             client.changeWorkingDirectory(pathname);
             client.dele(filename);
-//            client.logout();
             flag = true;
             System.out.println("删除文件成功");
         } catch (Exception e) {

@@ -1,7 +1,5 @@
-package com.ftp.TFPutils.server;
+package fromserver.socketclient;
 
-import com.ftp.TFPutils.ServerMessage;
-import org.apache.commons.net.DefaultSocketFactory;
 import org.apache.ftpserver.FtpServer;
 import org.apache.ftpserver.FtpServerFactory;
 import org.apache.ftpserver.ftplet.Authority;
@@ -14,14 +12,11 @@ import org.apache.ftpserver.usermanager.impl.WritePermission;
 import org.apache.logging.log4j.LogManager;
 
 import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/*
+/**
  *@description:
  *
  *@author 10068921(LgyTT)
@@ -43,7 +38,8 @@ public class MyFtpServer {
         BaseUser user=new BaseUser();
         user.setName("admin");
         user.setPassword("1234");
-        user.setHomeDirectory("E:\\FTPSeverPath");//设置用户主目录
+        //设置用户主目录
+        user.setHomeDirectory("E:\\FTPSeverPath");
         //添加权限
         List<Authority> authorities=new ArrayList<Authority>();
         authorities.add(new WritePermission());

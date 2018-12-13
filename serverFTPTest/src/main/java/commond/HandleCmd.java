@@ -1,6 +1,4 @@
-package Commond;
-
-import org.junit.jupiter.api.Test;
+package commond;
 
 import java.util.Scanner;
 

@@ -1,14 +1,12 @@
 package server;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
 
-/*
+/**
  *@description:
  *
  *@author 10068921(LgyTT)
@@ -21,18 +19,15 @@ public class Consumer {
             socket.connect(new InetSocketAddress("10.111.24.72",2122));
             System.out.println(socket.isBound());
 
-          OutputStream os=  new Consumer().sendMsg(socket,"E:\\ChromeDowns");
+          OutputStream os=  new Consumer().sendMsg(socket,"E:\\个人软件");
             socket.shutdownOutput();
             InputStream is=socket.getInputStream();
-            byte[]bytes=new byte[10];
+            BufferedReader br=new BufferedReader(new InputStreamReader(is,"utf-8"));
+            String msg;
             StringBuffer sb=new StringBuffer();
-            int i=-2;
-            while(i!=-1&&i!=0){
-                i=is.read(bytes);
-                sb.append(new String(bytes,"utf-8"));
-//                System.out.println(i+" receiver msg "+sb.toString()) ;
+            while((msg=br.readLine())!=null){
+                sb.append(new String(msg.getBytes(),"utf-8")+"\n");
             }
-
             System.out.println("The directory is "+sb.toString());
              is.close();
              os.close();

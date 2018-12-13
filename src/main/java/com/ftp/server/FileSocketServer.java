@@ -1,19 +1,24 @@
-package com.ftp.TFPutils.server;
+package com.ftp.server;
 
-import com.ftp.TFPutils.ServerMessage;
+
 import org.apache.commons.net.DefaultSocketFactory;
 import org.apache.ftpserver.FtpServer;
+import org.apache.ftpserver.FtpServerFactory;
+import org.apache.ftpserver.ftplet.Authority;
 import org.apache.ftpserver.ftplet.FtpException;
+import org.apache.ftpserver.listener.ListenerFactory;
+import org.apache.ftpserver.usermanager.impl.BaseUser;
+import org.apache.ftpserver.usermanager.impl.WritePermission;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 
-/*
+/**
  *@description:
  *
  *@author 10068921(LgyTT)
@@ -28,7 +33,7 @@ public class FileSocketServer {
     public FileSocketServer() {
         try {
              serverSocket=new DefaultSocketFactory().createServerSocket(2122);
-//             initStartFtp();
+             initStartFtp();
         } catch (IOException e) {
             log.error("socketServer open failed!");
             e.printStackTrace();
@@ -46,38 +51,37 @@ public class FileSocketServer {
             }
 return socket;
     }
-    public String Receiver(){
+    public String receiver(){
         if(!socket.isConnected()){
             log.error("socket is not connected!");
             return null;
         }
         StringBuffer sb=new StringBuffer();
-        byte[]bytes=new byte[10];
         try {
             is=socket.getInputStream();
-            int n=is.available();
-            while(is.read(bytes)!=-1){
-                String s=new String(bytes).trim();
-                sb.append(s);
-
-            }
-            sb.append(n);
+            //使用inputStream的read会出现“填满数组”的情况.
+           BufferedReader br=new BufferedReader(new InputStreamReader(is));
+           String msg;
+                while(( msg=br.readLine())!=null){
+                    sb.append(new String(msg.getBytes(),"utf-8"));
+                }
             socket.shutdownInput();
             return sb.toString();
+
         } catch (IOException e) {
             log.error(e.getMessage());
             e.printStackTrace();
         }
 return null;
     }
-    public void Send(String msg){
+    public void send(String msg){
         if(!socket.isConnected()){
             log.error("socket is not connected!");
             return;
         }
         try {
             os=socket.getOutputStream();
-            os.write(msg.getBytes("iso-8859-1"));
+            os.write(msg.getBytes());
             os.flush();
             socket.shutdownOutput();
         } catch (IOException e) {
@@ -93,15 +97,51 @@ return null;
                 .ListenName("default")
                 .FtpPort(2121)
                 .build();
-        FtpServer Server= new MyFtpServer().StartServerFtp(messages);
+        FtpServer ftpServer= startServerFtp(messages);
         try {
-            Server.start();
+            ftpServer.start();
             System.out.println("start server is successful!!!");
         } catch (FtpException e) {
             log.error("connect FTP is failed!!");
             e.printStackTrace();
         }
     }
+
+    private static FtpServer startServerFtp(ServerMessage messages) {
+        //开启ftp服务器用于文件传输
+        FtpServerFactory serverFactory=new FtpServerFactory();
+        ListenerFactory factory=new ListenerFactory();
+        //设置端口
+        factory.setPort(messages.FtpPort());
+        //替换默认监听
+        serverFactory.addListener(messages.ListenName(),factory.createListener());
+        //设置用户信息
+        BaseUser user=new BaseUser();
+        user.setName(messages.Name());
+        user.setPassword(messages.Passwd());
+        user.setHomeDirectory(messages.HomeDirectory());
+
+        //添加用户权限
+        List<Authority> authorities=new ArrayList<Authority>();
+        authorities.add(new WritePermission());
+        user.setAuthorities(authorities);
+        try{
+            serverFactory.getUserManager().save(user);
+            //配置文件位置（如使用配置文件方式初始化ftp
+            return serverFactory.createServer();
+        }catch (FtpException e){
+            e.fillInStackTrace();
+            return null;
+        }
+        /**
+         * 也可以使用配置文件来管理用户
+         */
+//      PropertiesUserManagerFactory userManagerFactory = new PropertiesUserManagerFactory();
+//      userManagerFactory.setFile(new File("users.properties"));
+//      serverFactory.setUserManager(userManagerFactory.createUserManager());
+    }
+
+
     public void closed(){
         try {
             os.close();

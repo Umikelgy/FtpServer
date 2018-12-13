@@ -1,4 +1,4 @@
-package com.ftp.socketClient;
+package fromserver.socketclient;
 
 import org.apache.commons.net.DefaultSocketFactory;
 import org.junit.jupiter.api.Test;
@@ -9,7 +9,7 @@ import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-/*
+/**
  *@description:
  *
  *@author 10068921(LgyTT)

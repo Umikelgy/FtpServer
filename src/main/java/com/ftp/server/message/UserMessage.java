@@ -1,4 +1,4 @@
-package fromserver.socketclient;
+package com.ftp.server.message;
 
 /**
  *@description:

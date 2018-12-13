@@ -1,4 +1,4 @@
-package com.ftp.server;
+package com.ftp.server.message;
 
 /**
  *@description:

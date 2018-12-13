@@ -1,6 +1,5 @@
 package fromserver.filehandle;
 
-import fromserver.socketclient.FtpUtils;
 import fromserver.socketclient.MyFtpServer;
 import fromserver.socketclient.ServerMessage;
 import fromserver.socketclient.UserMessage;

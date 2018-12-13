@@ -1,7 +1,7 @@
 package fromserver.socketclient;
 
 import org.apache.commons.net.DefaultSocketFactory;
-import org.junit.jupiter.api.Test;
+
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -33,7 +33,7 @@ public class TestClientData {
             e.printStackTrace();
         }
     }
-    @Test
+
     public void TestServer(){
         try {
             ServerSocket  serverSocket=new DefaultSocketFactory().createServerSocket(2121);

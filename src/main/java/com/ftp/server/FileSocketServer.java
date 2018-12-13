@@ -1,6 +1,7 @@
 package com.ftp.server;
 
 
+import com.ftp.server.message.ServerMessage;
 import org.apache.commons.net.DefaultSocketFactory;
 import org.apache.ftpserver.FtpServer;
 import org.apache.ftpserver.FtpServerFactory;
@@ -81,7 +82,7 @@ return null;
         }
         try {
             os=socket.getOutputStream();
-            os.write(msg.getBytes());
+            os.write(msg.getBytes("utf-8"));
             os.flush();
             socket.shutdownOutput();
         } catch (IOException e) {

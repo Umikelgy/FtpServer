@@ -7,18 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ce3b52bf-d317-4e1b-8ccb-79c33553a076" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ftp/server/command/CommandHandle.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ftp/server/common/Command.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/ServerMyFTP_jar/ServerMyFTP.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/ServerMyFTP_jar/ServerMyFTP.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/serverFTPTest/src/main/java/fromserver/filehandle/FileHandle.java" beforeDir="false" afterPath="$PROJECT_DIR$/serverFTPTest/src/main/java/fromserver/filehandle/FileHandle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/serverFTPTest/src/main/java/fromserver/socketclient/FtpUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ftp/server/files/FtpUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/serverFTPTest/src/main/java/fromserver/socketclient/TestClientData.java" beforeDir="false" afterPath="$PROJECT_DIR$/serverFTPTest/src/main/java/fromserver/socketclient/TestClientData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/serverFTPTest/src/main/java/fromserver/socketclient/UserMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ftp/server/message/UserMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/serverFTPTest/src/main/java/server/Consumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/serverFTPTest/src/main/java/server/Consumer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ftp/server/FileSocketServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ftp/server/FileSocketServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ftp/server/ServerMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ftp/server/message/ServerMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/TestEncode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/TestEncode.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -33,7 +23,7 @@
     <session id="-1831690104">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="9" />
+          <entry key="project.closed" value="10" />
           <entry key="project.open.time.1" value="4" />
           <entry key="project.open.time.2" value="4" />
           <entry key="project.open.time.4" value="1" />
@@ -61,7 +51,7 @@
         <counts>
           <entry key="class" value="2" />
           <entry key="java" value="15243" />
-          <entry key="txt" value="44" />
+          <entry key="txt" value="55" />
           <entry key="xml" value="25" />
         </counts>
       </usages-collector>
@@ -69,7 +59,7 @@
         <counts>
           <entry key="CLASS" value="2" />
           <entry key="JAVA" value="15243" />
-          <entry key="PLAIN_TEXT" value="44" />
+          <entry key="PLAIN_TEXT" value="55" />
           <entry key="XML" value="25" />
         </counts>
       </usages-collector>
@@ -473,8 +463,8 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544693582177" />
-    <property name="last_opened_file_path" value="$MAVEN_REPOSITORY$/com/alibaba/fastjson/1.2.49/fastjson-1.2.49.jar!/" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544694291680" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
@@ -599,7 +589,7 @@
       <workItem from="1543993856641" duration="1254000" />
       <workItem from="1544059011091" duration="10111000" />
       <workItem from="1544078669987" duration="53000" />
-      <workItem from="1544662565241" duration="23933000" />
+      <workItem from="1544662565241" duration="24051000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;server 1.0 and TestModify&quot;">
       <created>1544682528686</created>
@@ -608,7 +598,14 @@
       <option name="project" value="LOCAL" />
       <updated>1544682528686</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="&quot;command&quot;">
+      <created>1544694327222</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1544694327222</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -644,7 +641,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="153514000" />
+    <option name="totallyTimeSpent" value="153632000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -660,7 +657,7 @@
       <window_info anchor="bottom" id="Dependency Viewer" weight="0.23452769" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4989339" visible="true" weight="0.28664497" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4989339" weight="0.28664497" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4968017" weight="0.42019543" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -716,7 +713,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="&quot;server 1.0 and TestModify&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="&quot;server 1.0 and TestModify&quot;" />
+    <MESSAGE value="&quot;command&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="&quot;command&quot;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

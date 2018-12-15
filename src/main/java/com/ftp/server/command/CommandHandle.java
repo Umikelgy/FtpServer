@@ -21,8 +21,7 @@ public class CommandHandle {
     public  void handle(String command){
         List<String> commandList= parser(command);
         switch (command){
-            case Command
-                    .CD:openDirectory(commandList.get(0));
+            case Command.CD:openDirectory(commandList.get(0));
                 break;
                 default:
                     break;
@@ -37,6 +36,7 @@ public class CommandHandle {
  *@anthor  10068921
  */
     private  void openDirectory(String s) {
+
 
     }
 /**

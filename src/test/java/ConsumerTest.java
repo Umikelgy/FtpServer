@@ -37,6 +37,7 @@ public class ConsumerTest {
         OutputStream os=socket.getOutputStream();
         os.write(s.getBytes());
         os.flush();
+
         System.out.println("sending is successful!! ");
         return os;
     }

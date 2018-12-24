@@ -11,7 +11,7 @@ import java.net.Socket;
  **/
 public class ConsumerTest {
     @Test
-    public void Test()throws Exception{
+    public void Test(){
         try {
             Socket socket=new Socket();
             socket.connect(new InetSocketAddress("10.111.24.72",2122));

@@ -35,6 +35,7 @@ public class CommandHandle {
      *@anthor  10068921
      */
     public  void handle(String command){
+<<<<<<< HEAD
         switch (firstCommand(command)){
             case Command.CD:
                 openDirectory(command);break;
@@ -45,6 +46,14 @@ public class CommandHandle {
             case Command.LOGOUT:
                 logout();break;
                 default: break;
+=======
+        List<String> commandList= parser(command);
+        switch (command){
+            case Command.CD:openDirectory(commandList.get(0));
+                break;
+                default:
+                    break;
+>>>>>>> 5233edcb43b8cfc4957a19ca7cd4dab8769c1473
         }
 
     }
@@ -80,6 +89,7 @@ public class CommandHandle {
         }
         ftpUtils.uploadFile(Command.FTPTEMP,fileName,filePath);
         ftpUtils.downloadFile(Command.FTPTEMP,fileName,localPath);
+
 
     }
 

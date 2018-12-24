@@ -7,4 +7,8 @@ package com.ftp.server.common;
  **/
 public class Command {
     public static final  String CD="cd";
+    public static final  String UPLOAD="upload";
+    public static final String FTPTEMP="temp/";
+    public static final  String DOWNLOAD="download";
+    public static final String LOGOUT="logout";
 }

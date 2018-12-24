@@ -90,7 +90,14 @@ return null;
             e.printStackTrace();
         }
     }
-    public static void initStartFtp () throws IOException {//启动ftp服务器
+    /**
+     *@description
+     * //启动ftp服务器
+     *@param
+     *@return
+     *@anthor  10068921
+     */
+    public static void initStartFtp () throws IOException {
         ServerMessage messages=ServerMessage.newBuilder()
                 .Name("admin")
                 .Passwd("1234")

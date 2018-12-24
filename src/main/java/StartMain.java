@@ -1,4 +1,5 @@
 import com.ftp.server.FileSocketServer;
+import com.ftp.server.command.CommandHandle;
 import com.ftp.server.files.FileListUtils;
 
 import java.util.List;
@@ -11,19 +12,20 @@ import java.util.List;
  */
 public class StartMain {
     public static void main(String []args ) {
-        FileSocketServer server = new FileSocketServer();
+        FileSocketServer fileSocketServer= new FileSocketServer();
         System.out.println("服务已开启，端口号为：socket：2122，ftpServer:2121");
         while (true) {
-            server.accept();
-            String receiver = server.receiver();
-            List<String> fileList =  FileListUtils.getPath(receiver.trim());
+            fileSocketServer.accept();
+            String receiver = fileSocketServer.receiver();
+            new CommandHandle(fileSocketServer).handle(receiver);
 
+            List<String> fileList =  FileListUtils.getPath(receiver.trim());
             System.out.println("The path ["+receiver+"] has Directory that are :");
             for(String filename :fileList){
                 System.out.println(filename);
             }
-            server.send(FileListUtils.ToJson(fileList));
-            server.closed();
+
+            fileSocketServer.closed();
         }
     }
 }

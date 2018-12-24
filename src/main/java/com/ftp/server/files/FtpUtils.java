@@ -27,16 +27,35 @@ public class FtpUtils {
     public static FTPClient client=null;
 
     final static Logger logger = LogManager.getLogger(FtpUtils.class);
+
+    public void initFtpClient(){
+        client=new FTPClient();
+        client.setControlEncoding("UTF-8");
+
+        try {
+            client.connect(hostName,port);
+            client.login(username,passwd);
+            //是否登陆服务器
+            int replyCode=client.getReplyCode();
+            if(!FTPReply.isPositiveCompletion(replyCode)){
+
+                logger.error("connect failed ---ftp");
+            }
+            System.out.println("connect successful ---ftp");
+        }catch (MalformedURLException e){
+            e.printStackTrace();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
     /**
      *@description
-     * 初始化登陆ftp
-     *@param
-     *@return
-     *@anthor  10068921(lgyTT)
-     *@date  2018/11/26
-     *@other
+     * 登陆到ftp
+     *@param  message: 客户端信息
+     *@return  登陆状态，true为登陆成功
+     *@anthor  10068921
      */
-    public static boolean  initFtpClient(UserMessage message){//登陆ftp
+    public static boolean loginFtp(UserMessage message){
         boolean flag=false;
         client=new FTPClient();
         client.setControlEncoding("utf-8");
@@ -61,46 +80,25 @@ public class FtpUtils {
      *@description
      * 退出登录
      *@param
-     *@return
-     *@anthor  10068921(lgyTT)
-     *@date  2018/11/27
-     *@other
+     *@return 是否退出登录，true退出成功
+     *@anthor  10068921
      */
     public static boolean logoutFtp() {
         boolean flag=false;
-            try{
-                client.logout();
-                client.disconnect();
-                flag=true;
-            }catch (FTPConnectionClosedException e){
-                logger.error("the connection is close!");
-                e.printStackTrace();
-            }catch (IOException e){
-                logger.error("this is an error occurs while disconnecting");
-                e.printStackTrace();
-            }
-        return flag;
-    }
-    public void initFtpClient(){
-        client=new FTPClient();
-        client.setControlEncoding("UTF-8");
-
-        try {
-            client.connect(hostName,port);
-            client.login(username,passwd);
-            //是否登陆服务器
-            int replyCode=client.getReplyCode();
-            if(!FTPReply.isPositiveCompletion(replyCode)){
-
-                logger.error("connect failed ---ftp");
-            }
-            System.out.println("connect successful ---ftp");
-        }catch (MalformedURLException e){
+        try{
+            client.logout();
+            client.disconnect();
+            flag=true;
+        }catch (FTPConnectionClosedException e){
+            logger.error("the connection is close!");
             e.printStackTrace();
         }catch (IOException e){
+            logger.error("this is an error occurs while disconnecting");
             e.printStackTrace();
         }
+        return flag;
     }
+
     /**
      *@description
      * 上传文件

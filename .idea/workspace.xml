@@ -7,15 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ce3b52bf-d317-4e1b-8ccb-79c33553a076" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ftp/server/files/FileConsumer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/ConsumerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/serverFTPTest/src/main/java/MySocketServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/serverFTPTest/src/main/java/MySocketServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/StartMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/StartMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ftp/server/FileSocketServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ftp/server/FileSocketServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ftp/server/command/CommandHandle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ftp/server/command/CommandHandle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ftp/server/common/Command.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ftp/server/common/Command.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ftp/server/files/FtpUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ftp/server/files/FtpUtils.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -86,7 +78,7 @@
         <counts>
           <entry key="class" value="2" />
           <entry key="java" value="16821" />
-          <entry key="txt" value="55" />
+          <entry key="txt" value="58" />
           <entry key="xml" value="25" />
         </counts>
       </usages-collector>
@@ -94,7 +86,7 @@
         <counts>
           <entry key="CLASS" value="2" />
           <entry key="JAVA" value="16821" />
-          <entry key="PLAIN_TEXT" value="55" />
+          <entry key="PLAIN_TEXT" value="58" />
           <entry key="XML" value="25" />
         </counts>
       </usages-collector>
@@ -193,8 +185,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/ConsumerTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="18" column="59" selection-start-line="18" selection-start-column="59" selection-end-line="18" selection-end-column="59" />
+            <state relative-caret-position="230">
+              <caret line="13" column="22" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -490,7 +482,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545639875704" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545639960343" />
     <property name="last_opened_file_path" value="$USER_HOME$/gitlabProjects/orgstructsyc" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -625,7 +617,7 @@
       <workItem from="1545266809875" duration="835000" />
       <workItem from="1545353147199" duration="828000" />
       <workItem from="1545359409222" duration="1612000" />
-      <workItem from="1545611896267" duration="18149000" />
+      <workItem from="1545611896267" duration="18600000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;server 1.0 and TestModify&quot;">
       <created>1544682528686</created>
@@ -648,7 +640,35 @@
       <option name="project" value="LOCAL" />
       <updated>1544749432716</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="&quot;command1.0&quot;">
+      <created>1545639746626</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1545639746626</updated>
+    </task>
+    <task id="LOCAL-00005" summary="&quot;command1.0&quot;">
+      <created>1545639870692</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1545639870692</updated>
+    </task>
+    <task id="LOCAL-00006" summary="&quot;command1.0&quot;">
+      <created>1545639879677</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1545639879677</updated>
+    </task>
+    <task id="LOCAL-00007" summary="&quot;command1.0&quot;">
+      <created>1545639935430</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1545639935430</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -684,13 +704,12 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="188662000" />
+    <option name="totallyTimeSpent" value="189113000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49924356" visible="true" weight="0.25" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49924356" visible="true" weight="0.25" />
       <window_info id="Structure" order="1" sideWeight="0.50075644" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -706,8 +725,8 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49946696" weight="0.18566775" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50319827" side_tool="true" weight="0.39739415" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" sideWeight="0.49946696" visible="true" weight="0.32899022" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50053304" side_tool="true" visible="true" weight="0.32899022" />
       <window_info anchor="bottom" id="Messages" order="11" sideWeight="0.49946696" weight="0.32899022" />
       <window_info anchor="bottom" id="Dependency Viewer" order="12" weight="0.23452769" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -757,7 +776,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="&quot;server 1.0 and TestModify&quot;" />
     <MESSAGE value="&quot;command&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="&quot;command&quot;" />
+    <MESSAGE value="&quot;command1.0&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="&quot;command1.0&quot;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1144,8 +1164,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/ConsumerTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="18" column="59" selection-start-line="18" selection-start-column="59" selection-end-line="18" selection-end-column="59" />
+        <state relative-caret-position="230">
+          <caret line="13" column="22" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

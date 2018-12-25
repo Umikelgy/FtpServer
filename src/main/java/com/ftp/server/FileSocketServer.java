@@ -151,12 +151,15 @@ return null;
 
 
     public void closed(){
-        try {
-            os.close();
-            is.close();
-            socket.close();
-        }catch (IOException e){
-            e.printStackTrace();
+        if(os!=null&&is!=null) {
+            try {
+                os.close();
+                is.close();
+                socket.close();
+            } catch (IOException e) {
+                log.error(e.getMessage());
+//                e.printStackTrace();
+            }
         }
     }
 }

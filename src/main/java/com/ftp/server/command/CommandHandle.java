@@ -44,8 +44,18 @@ public class CommandHandle {
                 download(command);
             case Command.LOGOUT:
                 logout();break;
-            default: break;
+            default:
+                notCommand(command);
+               break;
         }
+
+    }
+
+    public  void notCommand(String command) {
+        String msg="The command ["+command+"] is false,please reInput !!";
+        fileSocketServer.send(msg);
+        System.out.println(msg);
+        fileSocketServer.closed();
 
     }
 
@@ -80,7 +90,8 @@ public class CommandHandle {
         }
         ftpUtils.uploadFile(Command.FTPTEMP,fileName,filePath);
         ftpUtils.downloadFile(Command.FTPTEMP,fileName,localPath);
-
+        String msg="download is successful!";
+        fileSocketServer.send(msg);
     }
 
     /**
@@ -99,6 +110,8 @@ public class CommandHandle {
         String fileName=parserCommands[0];
         String filePath=parserCommands[1];
         ftpUtils.downloadFile(Command.FTPTEMP,fileName,filePath);
+        String msg="upload is successful!";
+        fileSocketServer.send(msg);
     }
     private String firstCommand(String command){
         if(!Strings.isBlank(command)){

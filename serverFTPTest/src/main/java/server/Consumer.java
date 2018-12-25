@@ -17,7 +17,7 @@ public class Consumer {
             socket.connect(new InetSocketAddress("10.111.24.72",2122));
             System.out.println(socket.isBound());
 
-          OutputStream os=  new Consumer().sendMsg(socket,"E:\\个人软件");
+          OutputStream os=  new Consumer().sendMsg(socket,"upload tes.properties E:\\testFile");
             socket.shutdownOutput();
             InputStream is=socket.getInputStream();
             BufferedReader br=new BufferedReader(new InputStreamReader(is,"utf-8"));

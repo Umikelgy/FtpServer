@@ -17,13 +17,11 @@ public class StartMain {
         while (true) {
             fileSocketServer.accept();
             String receiver = fileSocketServer.receiver();
-            new CommandHandle(fileSocketServer).handle(receiver);
 
-            List<String> fileList =  FileListUtils.getPath(receiver.trim());
-            System.out.println("The path ["+receiver+"] has Directory that are :");
-            for(String filename :fileList){
-                System.out.println(filename);
-            }
+            CommandHandle commandHandle=new CommandHandle(fileSocketServer);
+
+            commandHandle.handle(receiver);
+
 
             fileSocketServer.closed();
         }

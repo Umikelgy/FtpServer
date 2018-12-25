@@ -16,7 +16,7 @@ public class ConsumerTest {
             Socket socket=new Socket();
             socket.connect(new InetSocketAddress("10.111.24.72",2122));
 
-            OutputStream os=  new ConsumerTest().sendMsg(socket,"E:\\个人软件");
+            OutputStream os=  new ConsumerTest().sendMsg(socket,"cd E:\\个人软件");
             socket.shutdownOutput();
             InputStream is=socket.getInputStream();
             BufferedReader br=new BufferedReader(new InputStreamReader(is,"utf-8"));

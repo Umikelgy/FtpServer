@@ -10,6 +10,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.util.Strings;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -35,13 +36,14 @@ public class CommandHandle {
      *@anthor  10068921
      */
     public  void handle(String command){
-        switch (firstCommand(command)){
+        String switchString =firstCommand(command);
+        switch (switchString){
             case Command.CD:
                 openDirectory(command);break;
             case Command.UPLOAD :
                 upload(command);break;
             case Command.DOWNLOAD:
-                download(command);
+                download(command);break;
             case Command.LOGOUT:
                 logout();break;
             default:
@@ -81,15 +83,17 @@ public class CommandHandle {
         String fileName=parserCommands[0];
         String filePath=parserCommands[1];
         String localPath=parserCommands[2];
-        String key="\\";
-        String key1="/";
-        if(filePath.endsWith(key)||fileName.endsWith(key1)){
+
+        if(!filePath.endsWith(fileName)){
             filePath=filePath+"/"+fileName;
-        } else {
-            filePath=filePath+fileName;
         }
         ftpUtils.uploadFile(Command.FTPTEMP,fileName,filePath);
-        ftpUtils.downloadFile(Command.FTPTEMP,fileName,localPath);
+
+        try {
+            ftpUtils.downloadFile(Command.FTPTEMP,fileName,localPath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         String msg="download is successful!";
         fileSocketServer.send(msg);
     }
@@ -109,7 +113,12 @@ public class CommandHandle {
         }
         String fileName=parserCommands[0];
         String filePath=parserCommands[1];
-        ftpUtils.downloadFile(Command.FTPTEMP,fileName,filePath);
+
+        try {
+            ftpUtils.downloadFile(Command.FTPTEMP,fileName,filePath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         String msg="upload is successful!";
         fileSocketServer.send(msg);
     }

@@ -43,7 +43,6 @@ public class FileSocketServer {
 
     }
     public  Socket  accept() {
-
             try {
                 socket = serverSocket.accept();
             } catch (IOException e) {

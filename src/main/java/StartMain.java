@@ -1,8 +1,5 @@
 import com.ftp.server.FileSocketServer;
 import com.ftp.server.command.CommandHandle;
-import com.ftp.server.files.FileListUtils;
-
-import java.util.List;
 
 /**
  *@description:

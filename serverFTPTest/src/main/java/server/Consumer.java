@@ -17,7 +17,9 @@ public class Consumer {
             socket.connect(new InetSocketAddress("10.111.24.72",2122));
             System.out.println(socket.isBound());
 
-          OutputStream os=  new Consumer().sendMsg(socket,"upload tes.properties E:\\testFile");
+            String msg1="upload pom.xml E:\\testFile";
+            String cmd="download mvnw.cmd E:\\project\\springboot\\mvnw.cmd E:\\testFile";
+          OutputStream os=  new Consumer().sendMsg(socket,msg1);
             socket.shutdownOutput();
             InputStream is=socket.getInputStream();
             BufferedReader br=new BufferedReader(new InputStreamReader(is,"utf-8"));

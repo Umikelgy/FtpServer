@@ -10,6 +10,9 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.*;
 import java.net.MalformedURLException;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.apache.commons.net.ftp.FTP.BINARY_FILE_TYPE;
 
@@ -128,13 +131,6 @@ public class FtpUtils {
             logger.error("upload failed!!");
             e.printStackTrace();
         }finally {
-            if(client.isConnected()) {
-                try {
-                    client.disconnect();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
             if(inputStream!=null) {
                 try {
                     inputStream.close();
@@ -170,13 +166,6 @@ public boolean uploadFile(String pathName,String filename,InputStream inputStrea
     }catch (Exception e){
         e.printStackTrace();
     }finally {
-        if (client.isConnected()) {
-            try {
-                client.disconnect();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
         if (inputStream!= null) {
             try {
                 inputStream.close();
@@ -292,50 +281,54 @@ public boolean uploadFile(String pathName,String filename,InputStream inputStrea
         }
         return flag;
     }
+
     /** * 下载文件 *
      * @param pathname FTP服务器文件目录 *
      * @param filename 文件名称 *
      * @param localPath 下载后的文件路径 *
      * @return */
-    public  boolean downloadFile(String pathname, String filename, String localPath){
+    public  boolean downloadFile(String pathname, String filename, String localPath) throws IOException {
         boolean flag = false;
         OutputStream os=null;
+        List<FTPFile> ftpFileList=ftpFiles(pathname,filename);
         try {
             System.out.println("开始下载文件");
-//            initFtpClient();
-            //切换FTP目录
-            client.changeWorkingDirectory(pathname);
-            FTPFile[] ftpFiles = client.listFiles();
-            for(FTPFile file : ftpFiles){
-                if(filename.equalsIgnoreCase(file.getName())){
-                    File localFile = new File(localPath + "/" + file.getName());
+            switch(ftpFileList.size()){
+                case 0:
+                    System.out.println("download is failed ,the FtpPath ["+pathname+"] is null! ");
+                    break;
+                case 1:
+                    File localFile = new File(localPath + "/" + ftpFileList.get(0).getName());
                     os = new FileOutputStream(localFile);
-                    client.retrieveFile(file.getName(), os);
+                    client.retrieveFile(ftpFileList.get(0).getName(), os);
+                    flag = true;
                     os.close();
-                }
+                    break;
+                default:
+                    System.out.println("The file ["+filename+"] is not one ,the number is "+ftpFileList.size());
+                    break;
             }
-            flag = true;
-            System.out.println("下载文件成功");
         } catch (Exception e) {
             System.out.println("下载文件失败");
             e.printStackTrace();
-        } finally{
-            if(client.isConnected()){
-                try{
-                    client.disconnect();
-                }catch(IOException e){
-                    e.printStackTrace();
-                }
-            }
-            if(null != os){
+        } finally {
+            if (null != os) {
                 try {
                     os.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+
             }
         }
         return flag;
+    }
+
+    private List<FTPFile> ftpFiles(String pathName,String fileName) throws IOException {
+        client.changeWorkingDirectory(pathName);
+        return Stream.of(client.listFiles())
+                .filter(file->fileName.equalsIgnoreCase(file.getName()))
+                .collect(Collectors.toList());
     }
 
     /** * 删除文件 *
